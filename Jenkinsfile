@@ -10,6 +10,7 @@ pipeline {
         AWS_DEFAULT_REGION = 'us-west-2'
         SLACK_ROOM = "${APP_NAME}"
         STAGE = ''
+        CI=true
     }
     stages {
         stage('Build & Test') {
