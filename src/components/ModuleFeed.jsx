@@ -5,7 +5,7 @@ class ModuleFeed extends Component {
   render() {
     return (
       <Segment attached="bottom">
-        <Card.Group itemsPerRow={2}>{this.props.cards}</Card.Group>
+        <Card.Group itemsPerRow={4}>{this.props.cards}</Card.Group>
       </Segment>
     );
   }

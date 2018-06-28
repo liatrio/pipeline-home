@@ -1,16 +1,59 @@
 const modules = {
   'Jenkins CI': {
-    link: 'http://jenkins.fastfeedback.rocks/',
+    key: 'jenkins',
     logo: 'jenkins.png'
   },
   'Bitbucket SCM': {
-    link: 'http://bitbucket.fastfeedback.rocks/',
+    key: 'bitbucket',
     logo: 'bitbucket.png'
   },
+  'JIRA ALM': {
+    key: 'jira',
+    logo: 'jira.png'
+  },
+  'Confluence Wiki': {
+    key: 'confluence',
+    logo: 'confluence.png'
+  },
   'Artifactory Repository': {
-    link: 'http://artifactory.fastfeedback.rocks/',
+    key: 'artifactory',
     logo: 'artifactory.png'
+  },
+  'Sonarqube Analysis': {
+    key: 'sonarqube',
+    logo: 'sonarqube.png'
+  },
+  'Chat Messenger': {
+    key: 'chat',
+    logo: 'slack.png'
+  },
+  'Dev Environment': {
+    key: 'devenv',
+    logo: 'docker.png'
   }
 };
 
-export default modules;
+function buildLink(key, site) {
+  switch (key) {
+    case 'jenkins':
+      return site.jenkins_base + '/job/' + site.project_key;
+    case 'bitbucket':
+      return site.bitbucket_base + '/projects/' + site.project_key;
+    case 'jira':
+      return site.jira_base + '/projects/' + site.project_key;
+    case 'confluence':
+      return site.confluence_base + '/display/' + site.project_key;
+    case 'artifactory':
+      return site.artifactory_base + '/';
+    case 'sonarqube':
+      return site.sonarqube_base + '/';
+    case 'chat':
+      return site.chat_base + '/';
+    case 'devenv':
+      return 'http://dev.' + site.app_name + '.' + site.tools_domain;
+    default:
+      return '';
+  }
+}
+
+export { modules, buildLink };

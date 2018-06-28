@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { Header, Icon } from 'semantic-ui-react';
+import { Header, Image } from 'semantic-ui-react';
 
 class Intro extends Component {
   render() {
     return (
-      <Header as="h1" icon textAlign="center">
-        <Icon name="dashboard" />
-        {this.props.title}
-        <Header.Subheader>Homepage</Header.Subheader>
+      <Header as="h1" attached="top">
+        <Image src={require(`../template/img/${this.props.logo_file}`)} />
+        <Header.Content>
+          {this.props.title}
+          <Header.Subheader>{this.props.subtitle}</Header.Subheader>
+        </Header.Content>
       </Header>
     );
   }
