@@ -1,8 +1,8 @@
 const site = {
   title: 'Demo Pipeline',
-  project_name: 'PROJECT_NAME',
-  project_key: 'PROJECT_KEY',
-  app_name: 'APP_NAME',
+  project_name: '__PROJECT_NAME__',
+  project_key: '__PROJECT_KEY__',
+  app_name: '__APP_NAME__',
   logo_file: 'logo.png',
   tools_domain: 'liatr.io',
   footer: 'Fail fast.',
