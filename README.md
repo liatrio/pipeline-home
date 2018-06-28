@@ -2,6 +2,8 @@
 
 This is a versatile home page for a set of DevOps tools in a pipeline.
 
+![screenshot](screenshot.png)
+
 # about
 
 This project...
@@ -9,6 +11,9 @@ This project...
 - uses [prettier](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#formatting-code-automatically) to format JavaScript
 - styles components with [Semantic UI React](https://react.semantic-ui.com/introduction)
 
+# customize
+
+Update the properties in `src/template/site.js`.
 
 # install
 
