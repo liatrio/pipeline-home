@@ -6,8 +6,6 @@ const site = {
   logo_file: 'logo.png',
   tools_domain: 'liatr.io',
   footer: 'Fail fast.',
-  slack: 'https://example.slack.com',
-  email: 'mailto:support@example.com',
   jenkins_base: 'http://jenkins.liatr.io',
   bitbucket_base: 'http://bitbucket.liatr.io',
   jira_base: 'http://jira.liatr.io',
