@@ -3,8 +3,8 @@ library 'pipeline-library'
 pipeline {
     agent none
     environment {
-        APP_NAME = "pipeline-home"
-        S3_BUCKET = "jph-test-bucket.liatr.io"
+        APP_NAME = "__APP_NAME__"
+        S3_BUCKET = "${APP_NAME}-dash.liatr.io"
         AWS_ACCESS_KEY_ID = credentials('AWSaccess')
         AWS_SECRET_ACCESS_KEY = credentials('AWSsecret')
         AWS_DEFAULT_REGION = 'us-west-2'
@@ -27,15 +27,18 @@ pipeline {
             }
         }
         stage('Deploy') {
+            when { branch 'master' }
             agent {
                 docker {
-                    image 'mesosphere/aws-cli:1.14.5'
+                    image 'cgswong/aws:latest'
+                    args '-e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION'
                 }
             }
             steps {
                 script {
                     STAGE = env.STAGE_NAME
-                    sh "./aws.sh s3 sync ../build/ s3://${S3_BUCKET} --delete"
+                    sh "aws s3 sync ./build/ s3://${S3_BUCKET} --delete"
+                    slackSend channel: env.SLACK_ROOM, color: 'good', message: "Updated ${APP_NAME} dashboard pushed to <http://${S3_BUCKET}/>"
                 }
             }
         }
