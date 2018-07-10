@@ -17,7 +17,7 @@ resource "aws_s3_bucket" "b" {
   acl    = "public-read"
 
   policy = <<POLICY
-  {
+{
     "Version":"2012-10-17",
     "Statement":[{
       "Sid":"PublicReadGetObject",
