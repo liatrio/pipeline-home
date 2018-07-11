@@ -15,9 +15,9 @@ provider "aws" {
 resource "aws_s3_bucket" "b" {
   bucket = "${var.bucket_name}"
   acl    = "public-read"
-
+  force_destroy = true
   policy = <<POLICY
-  {
+{
     "Version":"2012-10-17",
     "Statement":[{
       "Sid":"PublicReadGetObject",
