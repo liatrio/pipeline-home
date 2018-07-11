@@ -4,7 +4,7 @@ pipeline {
     agent none
     environment {
         APP_NAME = "__APP_NAME__"
-        S3_BUCKET = "${APP_NAME}-dash.liatr.io"
+        S3_BUCKET = "${APP_NAME}.liatr.io"
         AWS_ACCESS_KEY_ID = credentials('AWSaccess')
         AWS_SECRET_ACCESS_KEY = credentials('AWSsecret')
         AWS_DEFAULT_REGION = 'us-west-2'
