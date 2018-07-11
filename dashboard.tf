@@ -3,7 +3,7 @@ variable "bucket_name" {}
 terraform {
   backend "s3" {
     bucket = "liatristorage"
-    # key    = "liatristorage/dashboard.tfstate"
+    key    = "liatristorage/dashboard.tfstate"
     region = "us-west-2"
   }
 }
