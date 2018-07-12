@@ -36,7 +36,7 @@ const modules = {
 function buildLink(key, site) {
   switch (key) {
     case 'jenkins':
-      return site.jenkins_base + '/job/' + site.project_key;
+      return site.jenkins_base + '/job/demo-pipelines/job/' + site.project_name;
     case 'bitbucket':
       return site.bitbucket_base + '/projects/' + site.project_key;
     case 'jira':
