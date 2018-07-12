@@ -48,7 +48,7 @@ function buildLink(key, site) {
     case 'sonarqube':
       return site.sonarqube_base + '/';
     case 'chat':
-      return site.chat_base + '/';
+      return site.chat_base + '/messages/' + site.chat_room;
     case 'devenv':
       return 'http://dev.' + site.app_name + '.' + site.tools_domain;
     default:
