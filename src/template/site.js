@@ -3,6 +3,7 @@ const site = {
   project_name: '__PROJECT_NAME__',
   project_key: '__PROJECT_KEY__',
   app_name: '__APP_NAME__',
+  chat_room: '__CHAT_ROOM__',
   logo_file: 'logo.png',
   tools_domain: 'liatr.io',
   footer: 'Fail fast.',
