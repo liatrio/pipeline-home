@@ -1,21 +1,32 @@
-variable "bucket_name" {}
+variable "bucket_name" {
+  description = "Name given to this application instance"
+}
+
+variable "jenkins_user" {
+  description = "User who kicked off the Jenkins job"
+}
 
 terraform {
   backend "s3" {
-    bucket = "liatristorage"
-    key    = "liatristorage/dashboard.tfstate"
-    region = "us-west-2"
+    bucket               = "pipeline-state.liatr.io"
+    region               = "us-east-1"
+    key                  = "pipeline-dashboard.tfstate"
+    workspace_key_prefix = "demo"
+    dynamodb_table       = "pipeline-state-lock"
+    encrypt              = "true"
   }
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region  = "us-west-2"
+  version = "~> 1.54"
 }
 
 resource "aws_s3_bucket" "b" {
-  bucket = "${var.bucket_name}"
-  acl    = "public-read"
+  bucket        = "${var.bucket_name}"
+  acl           = "public-read"
   force_destroy = true
+
   policy = <<POLICY
 {
     "Version":"2012-10-17",
@@ -45,6 +56,14 @@ POLICY
     }
 }]
 EOF
+  }
+
+  tags {
+    Environment  = "demo"
+    Client       = "liatrio"
+    Project      = "Demo Pipeline"
+    Owner        = "${var.jenkins_user}"
+    DemoPipeline = "${var.app_name}"
   }
 }
 
