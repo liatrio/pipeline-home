@@ -1,5 +1,9 @@
-variable "bucket_name" {
+variable "app_name" {
   description = "Name given to this application instance"
+}
+
+variable "bucket_name" {
+  description = "Name of the bucket to store the dashboard files"
 }
 
 variable "jenkins_user" {
