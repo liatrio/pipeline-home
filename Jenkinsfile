@@ -5,8 +5,6 @@ pipeline {
     environment {
         APP_NAME = "__APP_NAME__"
         S3_BUCKET = "${APP_NAME}.liatr.io"
-        AWS_ACCESS_KEY_ID = credentials('AWSaccess')
-        AWS_SECRET_ACCESS_KEY = credentials('AWSsecret')
         AWS_DEFAULT_REGION = 'us-west-2'
         SLACK_ROOM = "${APP_NAME}"
         STAGE = ''
@@ -31,14 +29,16 @@ pipeline {
             agent {
                 docker {
                     image 'cgswong/aws:latest'
-                    args '-e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_DEFAULT_REGION'
+                    args '-e AWS_DEFAULT_REGION'
                 }
             }
             steps {
-                script {
-                    STAGE = env.STAGE_NAME
-                    sh "aws s3 sync ./build/ s3://${S3_BUCKET} --delete"
-                    slackSend channel: env.SLACK_ROOM, color: 'good', message: "Updated ${APP_NAME} dashboard pushed to <http://${S3_BUCKET}/>"
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'AWS-SVC-Jenkins', accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY' ]]) {
+                    script {
+                        STAGE = env.STAGE_NAME
+                        sh "aws s3 sync ./build/ s3://${S3_BUCKET} --delete"
+                        slackSend channel: env.SLACK_ROOM, color: 'good', message: "Updated ${APP_NAME} dashboard pushed to <http://${S3_BUCKET}/>"
+                    }
                 }
             }
         }

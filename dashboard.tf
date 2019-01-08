@@ -34,11 +34,20 @@ resource "aws_s3_bucket" "b" {
   policy = <<POLICY
 {
     "Version":"2012-10-17",
-    "Statement":[{
-      "Sid":"PublicReadGetObject",
-          "Effect":"Allow",
+    "Statement":[
+      {
+        "Sid":"PublicReadGetObject",
+        "Effect":"Allow",
         "Principal": "*",
         "Action":["s3:GetObject"],
+        "Resource":["arn:aws:s3:::${var.bucket_name}/*"
+        ]
+      },
+      {
+        "Sid":"JenkinsPutObject",
+        "Effect":"Allow",
+        "Principal": "arn:aws:iam::003744521125:user/SVC-Jenkins",
+        "Action":["s3:PutObject"],
         "Resource":["arn:aws:s3:::${var.bucket_name}/*"
         ]
       }
